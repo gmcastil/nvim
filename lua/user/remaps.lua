@@ -43,8 +43,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "J", "mpJ`p")
 
 -- Move text (experimental)
-vim.keymap.set("v", "J", "<Cmd>m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", "<Cmd>m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Delete text to void register (experimental)
 vim.keymap.set("n", "<leader>d", "\"_d")
