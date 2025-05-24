@@ -61,7 +61,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
-vim.opt.signcolumn = "auto"
+vim.opt.signcolumn = "yes:1"
 vim.opt.colorcolumn = ""
 
 -- Disable incremental searches from wrapping around - dead stop at the end of
