@@ -39,23 +39,51 @@ return {
         -- Function that Lazy runs after the plugin is loaded
         config = function()
 
-            local lspconfig = require("lspconfig")
-
             -- Bash language server with shellcheck integration
-            lspconfig.bashls.setup({
+            vim.lsp.enable('bashls')
+            vim.lsp.config('bashls', {
 
                 on_attach = on_attach,
+
                 -- See https://github.com/bash-lsp/bash-language-server for more details
                 settings = {
+
                     bashIde = {
-                        globPattern = "*@(.sh|.inc|.bash|.command)",
+                        globPattern = '*@(.sh|.inc|.bash|.command)',
                     },
+
                 },
+
+                filetypes = { 'bash', 'sh' },
+
+                single_file_support = true,
 
             })
 
+            -- C (clangd)
+            vim.lsp.enable('clangd')
+            vim.lsp.config('clangd', {
+
+                on_attach = on_attach,
+
+                settings = {
+
+                },
+
+                filetyypes = { 
+                    "c", "cpp", "objc", "objcpp", "cuda", "proto"
+                },
+
+                root_markers = {
+                    ".clangd", ".clang-tidy", ".clang-format", "compile_commands.json", "compile_flags.txt", "configure.ac", ".git"
+                },
+
+                single_file_support = true,
+            })
+
             -- Python (pyright)
-            lspconfig.pyright.setup({
+            vim.lsp.enable('pyright')
+            vim.lsp.config('pyright', {
 
                 -- Optional per-server hook to call when the LSP attaches to a buffer 
                 on_attach = on_attach,
@@ -63,7 +91,14 @@ return {
             })
 
             -- Lua language server (lua-ls)
-            lspconfig.lua_ls.setup({
+            vim.lsp.enable('lua-ls')
+            vim.lsp.config('lua-ls', {
+
+                -- Specify the command to run if necessary (defaults to
+                -- running the user's LSP if it exist, then the system variant)
+                cmd = {
+                    vim.fn.expand("~/.local/bin/lua-language-server")
+                },
 
                 -- Optional per-server hook to call when the LSP attaches to a buffer 
                 on_attach = on_attach,

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+git_repos="${HOME}/git-local-repos"
+lua_lsp_dir="${git_repos}/lua-language-server"
+
+# The Lua language server does not install in a reasonable way
+if [[ ! -x "${lua_lsp_dir}/bin/lua-language-server" ]]; then
+    printf '%s\n' "Error: Lua language server not installed" >&2
+    exit 1
+fi
+
+exec "${lua_lsp_dir}/bin/lua-language-server" -E "${lua_lsp_dir}/main.lua" "$@"
