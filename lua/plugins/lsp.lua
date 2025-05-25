@@ -41,23 +41,34 @@ return {
 
             local lspconfig = require("lspconfig")
 
-            -- Bash language server with shellcheck integrtation
+            -- Bash language server with shellcheck integration
             lspconfig.bashls.setup({
+
+                on_attach = on_attach,
+                -- See https://github.com/bash-lsp/bash-language-server for more details
+                settings = {
+                    bashIde = {
+                        globPattern = "*@(.sh|.inc|.bash|.command)",
+                    },
+                },
+
             })
 
             -- Python (pyright)
             lspconfig.pyright.setup({
+
+                -- Optional per-server hook to call when the LSP attaches to a buffer 
+                on_attach = on_attach,
+
             })
 
             -- Lua language server (lua-ls)
             lspconfig.lua_ls.setup({
 
-                -- Optional per-server hook to call when the LSP attaches to a
-                -- buffer 
+                -- Optional per-server hook to call when the LSP attaches to a buffer 
                 on_attach = on_attach,
 
-                -- See https://luals.github.io/wiki/settings/ for more
-                -- details
+                -- See https://luals.github.io/wiki/settings/ for more details
                 settings = {
 
                     Lua = {
@@ -85,14 +96,14 @@ return {
                             },
                         },
                         -- Note here that a .luarc.json in the project root
-                        -- directory can and should override these values.
-                        -- We just use sane defaults in the event a project
-                        -- doesn't have one.
+                        -- directory can and should override these values. We
+                        -- just use sane defaults in the event a project doesn't
+                        -- have one.
                         workspace = {
                             checkThirdParty = false,
                             library = {
-                                -- Depending on the usage, you might want to add additional paths
-                                -- here:
+                                -- Depending on the usage, you might want to add
+                                -- additional paths here:
                                 '${3rd}/luv/library',
                                 '${3rd}/busted/library',
                                 vim.env.VIMRUNTIME
