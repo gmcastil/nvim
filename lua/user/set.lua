@@ -6,7 +6,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 
 -- Fix backspace
-vim.opt.backspace = indent, start, eol
+vim.opt.backspace = "indent,start,eol"
 
 -- Always start with line numbers turned on and make sure that there is
 -- sufficient space so that columns don't hop around as the number gets larger
