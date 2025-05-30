@@ -14,9 +14,10 @@ vim.keymap.set("n", "<leader>L", function() OpenLuaScratchBuffer() end, opts)
 -- Close the current buffer
 -- vim.keymap.set("n", "<leader>c", 
 
+-- Expands `%%` to the CWD of the file in the current buffer (variation on `%`)
 vim.keymap.set("c", "%%", function()
-        return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:p:h") .. "/" or "%%"
-    end, { expr = true })
+    return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:p:h") .. "/" or "%%"
+end, { expr = true })
 
 -- Stop highlighting for the 'hlsearch' option. Doing it this way
 -- will clear all of the highlights of the previous search without having to do
