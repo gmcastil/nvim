@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Ripgrep
+if ! command -v rg 2>&1 >/dev/null; then
+    printf '%s\n' "No \`rg\` binary found in the PATH. Install ripgrep." >&2 
+fi
+

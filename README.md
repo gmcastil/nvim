@@ -22,4 +22,15 @@ To install the Bash language server on Mac OS:
 npm -i -g bash-language-server
 ```
 
+# Additional tools
+## Ripgrep
+The package manager of choice works fine on Debian
+```bash
+apt-get install ripgrep
+```
+or on Mac OS
+```bash
+brew install ripgrep
+```
+
 
