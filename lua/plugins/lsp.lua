@@ -14,9 +14,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
         -- LSP features
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration" })
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "LSP: Find references" })
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: Go to implementation" })
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
+        vim.keymap.set("n", "K",  vim.lsp.buf.hover, { desc = "LSP: Show hover documentation" })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
     end,
