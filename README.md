@@ -19,7 +19,13 @@ and use a wrapper script that points to it.
 
 To install the Bash language server on Mac OS:
 ```bash
-npm -i -g bash-language-server
+npm i -g bash-language-server
+```
+
+# Install tree-sitter
+The tree-sitter CLI tools are an NPM package, so run
+```sh
+npm i -g tree-sitter-cli
 ```
 
 # Additional tools

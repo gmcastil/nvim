@@ -1,0 +1,15 @@
+#!/bin/bash
+
+printf '%40s' "Cleaning Neovim cache and plugin directories..." >&1
+if ! rm -rf ~/.local/share/nvim ~/.local/state/nvim ~/.cache/nvim >/dev/null 2>&1; then
+	printf 'FAIL\n' >&1
+	exit 1
+else
+	printf 'OK\n' >&1
+fi
+
+printf '%40s\n' "Re-syncing plugins via Lazy.nvim..."
+nvim --headless "+Lazy sync" +qa
+
+exit "$?"
+
