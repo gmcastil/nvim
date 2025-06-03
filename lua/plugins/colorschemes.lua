@@ -5,6 +5,11 @@ return {
     },
 
     {
+        "rose-pine/neovim",
+        name = "rose-pine"
+    },
+
+    {
         "folke/tokyonight.nvim",
         priority = 1000
     }
