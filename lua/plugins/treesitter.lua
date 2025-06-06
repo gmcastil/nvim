@@ -53,7 +53,7 @@ return {
                     -- the buffer is too large
                     disable = function(lang, buf)
                         -- Disable if this is a filetype we
-                        local blacklist = { "html", "ruby" }
+                        local blacklist = { "html", "ruby", "tcl" }
                         for _, val in ipairs(blacklist) do
                             if lang == val then
                                 print("Disabled tree-sitter for language " .. lang)
@@ -76,7 +76,7 @@ return {
                         return false
                     end,
 
-                    additional_vim_regex_highlighting = { "markdown", "ruby" }
+                    additional_vim_regex_highlighting = { "markdown", "ruby", "tcl" }
 
                 },
             })
