@@ -36,6 +36,9 @@ vim.opt.sidescrolloff = 3
 -- Hide buffers instead
 vim.opt.hidden = true
 
+-- Set mouse options
+vim.opt.mouse = ""
+
 -- There are oodles of message configurations, so start by resetting it
 vim.opt.shortmess = vim.opt.shortmess._info.default
 -- Don't give file info when editing a file (or switching from one buffer to

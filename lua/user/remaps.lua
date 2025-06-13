@@ -1,51 +1,57 @@
--- Default options
-local opts = { noremap = true, silent = true }
+-- Import global functions
+local globals = require("user.globals")
 
--- Open netrw
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, opts)
+-- Define a local helper function to set keymaps more easily
+local function map(mode, lhs, rhs, desc)
+    local opts = { noremap = true, silent = true, desc = desc }
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
 
--- Edit top level configuration or change keymaps
-vim.keymap.set("n", "<leader>ev", function() EditConfig("init.lua") end, opts)
-vim.keymap.set("n", "<leader>kv", function() EditConfig("lua/user/remaps.lua") end, opts)
--- Reloads the entire configuration
-vim.keymap.set("n", "<leader>sv", function() ReloadConfig() end, opts)
--- Open a Lua scratch buffer
-vim.keymap.set("n", "<leader>L", function() OpenLuaScratchBuffer() end, opts)
--- Close the current buffer
--- vim.keymap.set("n", "<leader>c", 
+-- Edit configuration files
+map("n", "<leader>ev", function () globals.EditConfig("lua/user/init.lua") end, "Edit top level user configuration")
+map("n", "<leader>kv", function () globals.EditConfig("lua/user/remaps.lua") end, "Edit user keymaps")
+map("n", "<leader>sv", function () globals.ReloadConfig() end, "Reloads the entire configuration")
+
+-- Open special buffers
+map("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
+map("n", "<leader>L", function () globals.OpenLuaScratchBuffer() end, "Open a Lua scratch buffer")
+
+-- Buffer navigation
+map("n", "<leader>c", "<C-w>c", "Close the current window")
+map("n", "<leader><leader>", "<C-^>", "Alternate file")
 
 -- Expands `%%` to the CWD of the file in the current buffer (variation on `%`)
 vim.keymap.set("c", "%%", function()
     return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:p:h") .. "/" or "%%"
-end, { expr = true })
+end, { expr = true, desc = "Expands `%%` to the CWD of the current buffer" })
 
 -- Stop highlighting for the 'hlsearch' option. Doing it this way
 -- will clear all of the highlights of the previous search without having to do
 -- silly things like /asdf which trashes the result of the previous search
-vim.keymap.set("n", "<Esc>", "<Cmd>nohlsearch<CR>")
+map("n", "<Esc>", "<Cmd>nohlsearch<CR>", "")
 
--- Window Navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)  -- Left
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)  -- Down
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)  -- Up
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)  -- Right
+-- Window navigation
+map("n", "<C-h>", "<C-w>h", "Left window")
+map("n", "<C-j>", "<C-w>j", "Down window")
+map("n", "<C-k>", "<C-w>k", "Up window")
+map("n", "<C-l>", "<C-w>l", "Right window")
 
--- Resize Windows
-vim.keymap.set("n", "<C-Up>", "<Cmd>resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", "<Cmd>resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", opts)
+-- Resize windows
+map("n", "<C-Up>", "<Cmd>resize +2<CR>", "Resize up")
+map("n", "<C-Down>", "<Cmd>resize -2<CR>", "Resize down")
+map("n", "<C-Left>", "<Cmd>vertical resize -2<CR>", "Resize left")
+map("n", "<C-Right>", "<Cmd>vertical resize +2<CR>", "Resize right")
 
 -- Scroll up and down half a screen, but keep the cursor in the middle
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz", "")
+map("n", "<C-u>", "<C-u>zz", "")
 
 -- Join lines without moving the cursor - TODO: pollutes the jumplist
-vim.keymap.set("n", "J", "mpJ`p")
+map("n", "J", "mpJ`p", "")
 
 -- Move text (experimental)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv", "")
+map("v", "K", ":m '<-2<CR>gv=gv", "")
 
 -- Delete text to void register (experimental)
 vim.keymap.set("n", "<leader>d", "\"_d")

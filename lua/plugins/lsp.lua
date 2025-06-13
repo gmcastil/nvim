@@ -46,11 +46,16 @@ return {
         -- Function that Lazy runs after the plugin is loaded
         config = function()
 
+            -- Auto complete capbilities to provide to each LSP
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
             -- Bash language server with shellcheck integration
             vim.lsp.enable('bashls')
             vim.lsp.config('bashls', {
 
                 on_attach = on_attach,
+
+                capabilities = capabilities,
 
                 -- See https://github.com/bash-lsp/bash-language-server for more details
                 settings = {
@@ -72,6 +77,8 @@ return {
             vim.lsp.config('clangd', {
 
                 on_attach = on_attach,
+
+                capabilities = capabilities,
 
                 settings = {
 
@@ -97,6 +104,8 @@ return {
                 -- Optional per-server hook to call when the LSP attaches to a buffer 
                 on_attach = on_attach,
 
+                capabilities = capabilities,
+
             })
 
             -- Lua language server (lua-ls)
@@ -111,6 +120,9 @@ return {
 
                 -- Optional per-server hook to call when the LSP attaches to a buffer 
                 on_attach = on_attach,
+
+                -- LSP comparison capabilities
+                capabilities = capabilities,
 
                 -- See https://luals.github.io/wiki/settings/ for more details
                 settings = {
@@ -145,13 +157,7 @@ return {
                         -- have one.
                         workspace = {
                             checkThirdParty = false,
-                            library = {
-                                -- Depending on the usage, you might want to add
-                                -- additional paths here:
-                                '${3rd}/luv/library',
-                                '${3rd}/busted/library',
-                                vim.env.VIMRUNTIME
-                            },
+                            library = vim.api.nvim_get_runtime_file("lua", true),
                         },
                     },
                 },

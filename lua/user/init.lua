@@ -4,8 +4,6 @@
 require("user.autocmds")
 -- Some sweet keybinds
 require("user.remaps")
--- Global function definitions
-require("user.globals")
 -- All those options that make Vim useful
 require("user.set")
 -- UI changes
