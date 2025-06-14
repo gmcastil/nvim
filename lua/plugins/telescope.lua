@@ -27,10 +27,10 @@ return {
 
             local builtin = require("telescope.builtin")
             -- File pickers
-            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Lists all files n project, respects .gitignore" })
+            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Lists all files in project, respects .gitignore" })
             vim.keymap.set("n", "<leader>pg", builtin.git_files, { desc = "Lists only explicitly tracked files in project, respects .gitignore" })
-            vim.keymap.set("n", "<leader>ps", builtin.grep_string, { desc = "Search all files in project for current word" })
-            vim.keymap.set("n", "<leader>pl", builtin.live_grep, { desc = "Search all files in project, live result" })
+            vim.keymap.set("n", "<leader>ps", builtin.grep_string, { desc = "Search all files in project for a word FIXME" })
+            vim.keymap.set("n", "<leader>pl", builtin.live_grep, { desc = "Live search all files in project (comments, macros)" })
 
             -- LSP specific pickers
             vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Telescope: List symbols in current buffer" })

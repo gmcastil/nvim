@@ -24,6 +24,8 @@ To install the Bash language server on Mac OS:
 ```bash
 npm i -g bash-language-server
 ```
+## Clangd
+This works pretty much out of the box
 
 ## VHDL-LS (VHDL Language Server)
 ```bash

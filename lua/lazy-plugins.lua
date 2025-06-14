@@ -9,8 +9,12 @@ require("lazy").setup({
     -- Configure any other settings here. See the documentation for more details.
     install = { colorscheme = { "habamax" } },
 
-    -- Automatically check for plugin updates
-    checker = { enabled = true },
+    checker = {
+        -- Yes, automatically check for plugin updates but...
+        enabled = true,
+        -- ...stop telling me you're checking on startup
+        notify = false,
+    },
 
     performance = {
 

@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration" })
         vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "LSP: Find references" })
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: Go to implementation" })
-        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
+        vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Show hover documentation" })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 
@@ -78,8 +78,20 @@ return {
 
                 cmd = {
                     "clangd",
+                    -- Enables autocompletion from all visible scopes, not just
+                    -- local - useful for global symbols.
+                    "--all-scopes-completion",
                     "--background-index",
---                    "--compile-commands-dir=/home/castillo/github/arty-z7/extern/linux-xlnx"
+                    -- Disables auto-insertion of headers in completions
+                    "--header-insertion=never",
+                    "--header-insetion-decorators=false",
+                    -- Gimme gimme
+                    "--limit-results=1000",
+                    -- This can be useful for providing additional compile flags
+                    -- beyond what is in the compile_commands.json so that I can
+                    -- tell the tool to shup up about style or unused params and
+                    -- such
+                    "--enable-config",
                 },
 
                 on_attach = on_attach,
