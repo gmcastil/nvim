@@ -1,24 +1,22 @@
-local M = {}
-
-function M.configure_floats(opts)
-
-    local border = opts and opts.border or nil
-
-    -- Diagnostic floats
-    -- vim.diagnostic.config({
-    --     float = {
-    --         border = border,
-    --     },
-    -- })
-
-    -- LSP and signature help borders
-    -- vim.lsp.handlers["textDocument/hover"] =
-    --     vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-
-    -- vim.lsp.handlers["textDocument/signatureHelp"] =
-    --     vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+function SetStatusLine()
+    vim.o.laststatus = 2
+    vim.o.statusline = table.concat({
+        "%{mode()}",                                        -- Mode
+        " %{expand('$USER')}@",                             -- Username
+        "%{hostname()}",                                    -- Host
+        ":%{substitute(expand('%:p'), expand('$HOME'), '~', '')}",  -- Rsync-friendly full path
+        " %{&modified ? '[+]' : ''}",                       -- Modified
+        " %{&readonly ? '[RO]' : ''}",                      -- Readonly
+        " %{FugitiveStatusline()}",                         -- Git info from Fugitive
+        " %=",                                              -- Right-align
+        "%l:%c",                                            -- Line:Column
+    })
 
 end
 
-return M
+SetStatusLine()
+
+
+
+
 

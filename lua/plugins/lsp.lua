@@ -76,6 +76,12 @@ return {
             vim.lsp.enable('clangd')
             vim.lsp.config('clangd', {
 
+                cmd = {
+                    "clangd",
+                    "--background-index",
+--                    "--compile-commands-dir=/home/castillo/github/arty-z7/extern/linux-xlnx"
+                },
+
                 on_attach = on_attach,
 
                 capabilities = capabilities,
@@ -84,12 +90,12 @@ return {
 
                 },
 
-                filetypes = { 
+                filetypes = {
                     "c", "cpp", "objc", "objcpp", "cuda", "proto"
                 },
 
                 root_markers = {
-                    ".clangd", ".clang-tidy", ".clang-format", 
+                    ".clangd", ".clang-tidy", ".clang-format",
                     "compile_commands.json", "compile_flags.txt", "configure.ac",
                     ".git"
                 },
@@ -163,6 +169,36 @@ return {
                 },
                 filetypes = { "lua" },
             })
+
+            -- VHDL language server (VHDL_LS)
+            vim.lsp.enable('vhdl_ls')
+            vim.lsp.config('vhdl_ls', {
+
+                cmd = {
+                    vim.fn.expand("~/.local/bin/vhdl_ls")
+                },
+
+                -- Optional per-server hook to call when the LSP attaches to a buffer 
+                on_attach = on_attach,
+
+                -- LSP comparison capabilities
+                capabilities = capabilities,
+
+                filetypes = { "vhdl" },
+
+                root_markers = {
+                    "vhdl_ls.toml",
+                    ".git"
+                },
+
+                settings = {
+
+                },
+
+                single_file_support = true,
+
+            })
+
         end,
 
         -- Optional: list of other specs or plugin names to load before this one

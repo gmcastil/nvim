@@ -1,5 +1,6 @@
 -- Import global functions
 local globals = require("user.globals")
+local debug = require("user.debug")
 
 -- Define a local helper function to set keymaps more easily
 local function map(mode, lhs, rhs, desc)
@@ -7,14 +8,19 @@ local function map(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+-- LSP debugging stuff
+--
+-- Use `:lua require("user.globals").LspClientSummary()` to do this manually
+map("n", "<leader>Ql", function() debug.LspClientSummary() end, "Debug: Summarize the LSP configuration for the active buffer")
+
 -- Edit configuration files
-map("n", "<leader>ev", function () globals.EditConfig("lua/user/init.lua") end, "Edit top level user configuration")
-map("n", "<leader>kv", function () globals.EditConfig("lua/user/remaps.lua") end, "Edit user keymaps")
-map("n", "<leader>sv", function () globals.ReloadConfig() end, "Reloads the entire configuration")
+map("n", "<leader>ev", function() globals.EditConfig("lua/user/init.lua") end, "Edit top level user configuration")
+map("n", "<leader>kv", function() globals.EditConfig("lua/user/remaps.lua") end, "Edit user keymaps")
+map("n", "<leader>sv", function() globals.ReloadConfig() end, "Reloads the entire configuration")
 
 -- Open special buffers
 map("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
-map("n", "<leader>L", function () globals.OpenLuaScratchBuffer() end, "Open a Lua scratch buffer")
+map("n", "<leader>L", function() globals.OpenLuaScratchBuffer() end, "Open a Lua scratch buffer")
 
 -- Buffer navigation
 map("n", "<leader>c", "<C-w>c", "Close the current window")
