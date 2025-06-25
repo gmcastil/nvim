@@ -8,11 +8,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local opts = { buffer = bufnr, noremap = true, silent = true }
 
         -- Navigation
-        vim.keymap.set("n", "[d", function()
-            vim.diagnostic.jump({ count = 1, float = true })
-        end, opts)
         vim.keymap.set("n", "]d", function()
-            vim.diagnostic.jump({ count = -1, float = true })
+            vim.diagnostic.jump({ count = 1, float = true, severity = nil })
+        end, opts)
+        vim.keymap.set("n", "[d", function()
+            vim.diagnostic.jump({ count = -1, float = true, severity = nil })
         end, opts)
         vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)

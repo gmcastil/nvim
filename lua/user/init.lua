@@ -10,3 +10,6 @@ require("user.set")
 require("user.ui")
 -- Debugging commands for future use (selectively enable as desired)
 require("user.debug")
+-- Filetype identification and make integration
+require("user.filetypes")
+
