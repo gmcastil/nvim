@@ -41,6 +41,12 @@ cargo install vhdl_ls
 cp -av vhdl_libraries ~/.local/
 ```
 
+## JSON
+Install the language server
+```bash
+npm i -g vscode-langservers-extracted
+```
+
 # Install tree-sitter
 The tree-sitter CLI tools are an NPM package, so run
 ```sh
