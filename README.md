@@ -53,6 +53,16 @@ The tree-sitter CLI tools are an NPM package, so run
 npm i -g tree-sitter-cli
 ```
 
+# Code Formatting
+## Python and Others
+Currently using `black` and `isort` with the `conform.nvim` plugin. On Mac OS these could be installed through brew:
+```sh
+brew install stylua
+brew install black isort
+brew install prettierd prettier
+```
+This also will install the `prettierd` formatter for Markdown.
+
 # Additional tools
 ## Ripgrep
 The package manager of choice works fine on Debian
