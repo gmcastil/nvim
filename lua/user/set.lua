@@ -82,9 +82,3 @@ vim.opt.splitbelow = true
 
 -- Disable system bell (particularly annoying when using the Cygwin console)
 vim.opt.belloff = esc
-
--- Use the `par` program to format text if it's available
-if vim.fn.executable("par") == 1 then
-    vim.opt.formatprg = "par"
-end
-

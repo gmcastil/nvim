@@ -18,7 +18,7 @@ return
             -- Manual completion only; nothing pops up unless I ask for it
             completion = {
                 autocomplete = false,
-                completeopt = "menu,menuone,noinsert,noselect",
+                completeopt = "menu,menuone,noinsert",
             },
 
             -- Better borders

@@ -22,3 +22,22 @@ vim.api.nvim_create_autocmd({ "WinLeave" }, {
 -- vim.api.nvim_create_autocmd({ "Filetype", {
 --     pattern = "bash, sh",
 --     callb
+--
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        -- Prevents wild wrapping behavior within parenthesis in docstrings
+        vim.opt_local.indentkeys:remove("o")
+    end,
+})
+
+-- Use the `par` program to format text if it's available for the following
+-- types of files
+if vim.fn.executable("par") == 1 then
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "markdown", "text", "gitcommit" },
+        callback = function()
+            vim.opt_local.formatprg = "par"
+        end,
+    })
+end
