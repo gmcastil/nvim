@@ -84,7 +84,7 @@ return {
                     "--background-index",
                     -- Disables auto-insertion of headers in completions
                     "--header-insertion=never",
-                    "--header-insetion-decorators=false",
+                    "--header-insertion-decorators=false",
                     -- Gimme gimme
                     "--limit-results=1000",
                     -- This can be useful for providing additional compile flags
