@@ -29,7 +29,7 @@ return {
         -- coding style standards
         format_on_save = function(bufnr)
             -- Disable autoformat on certain filetypes
-            local ignore_filetypes = { "c", "cpp" }
+            local ignore_filetypes = { "c", "cpp", "sh" }
             if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
                 return
             end
@@ -42,12 +42,12 @@ return {
             if bufname:match("/node_modules/") then
                 return
             end
-            return { timeout_ms = 500, lsp_format = "fallback" }
+            return { timeout_ms = 5000, lsp_format = "fallback" }
         end,
         -- Define your formatters
         formatters_by_ft = {
             c = { "clang_format" },
-            lua = { "stylua" },
+            -- lua = { "stylua" },
             python = { "black" },
             markdown = { "prettierd" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -59,7 +59,7 @@ return {
         -- Customize formatters
         formatters = {
             clang_format = {
-                prepend_args = { '--fallback-style=LLVM' },
+                prepend_args = { "--fallback-style=LLVM" },
             },
             shfmt = {
                 prepend_args = { "-i", "4" },

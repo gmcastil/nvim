@@ -1,3 +1,7 @@
+-- Enable project-local configs
+vim.o.exrc = true
+vim.o.secure = true
+
 -- Better cursor
 vim.opt.guicursor = ""
 

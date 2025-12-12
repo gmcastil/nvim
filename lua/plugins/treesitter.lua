@@ -5,7 +5,6 @@ return {
         cmd = "TSPlaygroundToggle",
 
         config = function()
-
             require("nvim-treesitter.configs").setup({
 
                 playground = { enable = true }
@@ -27,7 +26,6 @@ return {
         lazy = false,
 
         config = function()
-
             require("nvim-treesitter.configs").setup({
                 -- Directory to install parsers and quereis to
                 install_dir = vim.fn.stdpath('data') .. '/site',
@@ -61,7 +59,7 @@ return {
                             end
                         end
 
-                        local max_filesize = 100 * 1024
+                        local max_filesize = 200 * 1024
                         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
                         if ok and stats and stats.size > max_filesize then
                             vim.notify(
@@ -83,4 +81,3 @@ return {
         end
     }
 }
-

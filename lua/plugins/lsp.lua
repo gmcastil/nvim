@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Show hover documentation" })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-
     end,
 })
 
@@ -45,7 +44,6 @@ return {
         "neovim/nvim-lspconfig",
         -- Function that Lazy runs after the plugin is loaded
         config = function()
-
             -- Auto complete capbilities to provide to each LSP
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -78,6 +76,7 @@ return {
 
                 cmd = {
                     "clangd",
+                    "--log=verbose",
                     -- Enables autocompletion from all visible scopes, not just
                     -- local - useful for global symbols.
                     "--all-scopes-completion",
@@ -119,7 +118,7 @@ return {
             vim.lsp.enable('pyright')
             vim.lsp.config('pyright', {
 
-                -- Optional per-server hook to call when the LSP attaches to a buffer 
+                -- Optional per-server hook to call when the LSP attaches to a buffer
                 on_attach = on_attach,
 
                 capabilities = capabilities,
@@ -136,7 +135,7 @@ return {
                     vim.fn.expand("~/.local/bin/lua-language-server")
                 },
 
-                -- Optional per-server hook to call when the LSP attaches to a buffer 
+                -- Optional per-server hook to call when the LSP attaches to a buffer
                 on_attach = on_attach,
 
                 -- LSP comparison capabilities
@@ -190,7 +189,7 @@ return {
                     vim.fn.expand("~/.local/bin/vhdl_ls")
                 },
 
-                -- Optional per-server hook to call when the LSP attaches to a buffer 
+                -- Optional per-server hook to call when the LSP attaches to a buffer
                 on_attach = on_attach,
 
                 -- LSP comparison capabilities
@@ -210,6 +209,7 @@ return {
                 single_file_support = true,
 
             })
+
             -- JSON
             vim.lsp.enable('jsonls')
             vim.lsp.config('jsonls', {
@@ -224,6 +224,24 @@ return {
 
             })
 
+            -- LaTeX
+            vim.lsp.enable('ltex_plus')
+            vim.lsp.config('ltex_plus', {
+
+                cmd = { "ltex-ls-plus" },
+                filetypes = { "bib", "context", "gitcommit", "html", "markdown", "org",
+                    "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst",
+                    "tex", "text", "typst", "xhtml" },
+                root_markers = { ".git" },
+                settings = {
+                    ltex = {
+                        enabled = { "bib", "context", "gitcommit", "html", "markdown", "org",
+                            "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst",
+                            "tex", "latex", "text", "typst", "xhtml" }
+                    }
+                }
+
+            })
         end,
 
         -- Optional: list of other specs or plugin names to load before this one
@@ -249,4 +267,3 @@ return {
         enabled = true,
     },
 }
-
