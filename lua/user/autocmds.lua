@@ -35,9 +35,10 @@ vim.api.nvim_create_autocmd("FileType", {
 -- types of files
 if vim.fn.executable("par") == 1 then
     vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "markdown", "text", "gitcommit" },
+        pattern = { "markdown", "text", "gitcommit", "tex" },
         callback = function()
             vim.opt_local.formatprg = "par"
         end,
     })
 end
+

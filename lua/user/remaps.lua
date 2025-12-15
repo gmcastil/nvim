@@ -87,3 +87,7 @@ vim.keymap.set("n", "\"j", "<Cmd>jumps<CR>")
 -- Might replace with the undo history plugin at some point
 vim.keymap.set("n", "\"c", "<Cmd>changes<CR>")
 
+-- LuaSnap related (using 'z' for the snipz namespace)
+vim.keymap.set("n", "<leader>zr", "<Cmd>SnipReloadAll<CR>")
+vim.keymap.set("n", "<leader>zl", "<Cmd>SnipList<CR>")
+

@@ -19,7 +19,7 @@ return {
         -- The master branch is frozen as of mid-May 2025 and all development work
         -- has migrated to main.  The installation and setup are different and a lot
         -- of online sources and the documentation still hasn't caught up yet.
-        branch = "master",
+        branch = "main",
 
         build = ":TSUpdate",
 
@@ -33,7 +33,7 @@ return {
                 ensure_installed = {
                     "vimdoc", "c", "cpp", "lua", "bash", "python", "vhdl",
                     "verilog", "tcl", "make", "json", "yaml", "cmake", "markdown",
-                    "markdown_inline", "diff"
+                    "markdown_inline", "diff", "latex"
                 },
 
                 -- Install parsers asynchronously (only applies to ensure_installed

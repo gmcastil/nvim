@@ -12,6 +12,7 @@ return
     config = function()
 
         local cmp = require("cmp")
+        local luasnip = require("luasnip")
 
         cmp.setup({
 
@@ -52,6 +53,30 @@ return
                 end,
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),  -- Confirm selection
                 ["<C-e>"] = cmp.mapping.abort(),                    -- Close the menu
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if luasnip.expand_or_jumpable() then
+                        -- 1. Priority: If we can expand a trigger or jump in a snippet, do that first
+                        vim.notify("Expanding...")
+                        luasnip.expand_or_jump()
+                    elseif cmp.visible() then
+                        -- 2. Second Priority: If the menu is open, select the next item
+                        vim.notify("Manu expand...")
+                        cmp.select_next_item()
+                    else
+                        -- 3. Fallback: Just insert a regular tab
+                        vim.notify("tab tab tab ...")
+                        fallback()
+                    end
+                end, { "i", "s" }),
+
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if luasnip.jumpable(-1) then
+                        -- Allows you to go BACKWARDS through placeholders
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
             }),
 
             -- Ghost text preview disabled (re-enable by setting to `true`)

@@ -52,6 +52,7 @@ The tree-sitter CLI tools are an NPM package, so run
 ```sh
 npm i -g tree-sitter-cli
 ```
+On Mac OS this can be done using `brew install tree-sitter-cli`.
 
 # Code Formatting
 ## Python and Others

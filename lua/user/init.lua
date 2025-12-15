@@ -12,4 +12,6 @@ require("user.ui")
 require("user.debug")
 -- Filetype identification and make integration
 require("user.filetypes")
+-- Utilities, commands, etc.
+require("user.util")
 
