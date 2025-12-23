@@ -228,16 +228,22 @@ return {
             vim.lsp.enable('ltex_plus')
             vim.lsp.config('ltex_plus', {
 
+                on_attach = function(client, bufnr)
+                    require("ltex-utils").on_attach(bufnr)
+                end,
+
                 cmd = { "ltex-ls-plus" },
                 filetypes = { "bib", "context", "gitcommit", "html", "markdown", "org",
                     "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst",
                     "tex", "text", "typst", "xhtml" },
                 root_markers = { ".git" },
                 settings = {
+
                     ltex = {
                         enabled = { "bib", "context", "gitcommit", "html", "markdown", "org",
                             "pandoc", "plaintex", "quarto", "mail", "mdx", "rmd", "rnoweb", "rst",
-                            "tex", "latex", "text", "typst", "xhtml" }
+                            "tex", "latex", "text", "typst", "xhtml" },
+                        language = "en-US"
                     }
                 }
 
