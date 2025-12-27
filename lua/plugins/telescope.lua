@@ -6,7 +6,7 @@ return {
 
     {
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.8', -- or branch = '0.1.x',
+        -- tag = '0.1.8', -- or branch = '0.1.x',
 
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -27,17 +27,24 @@ return {
 
             local builtin = require("telescope.builtin")
             -- File pickers
-            vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Lists all files in project, respects .gitignore" })
-            vim.keymap.set("n", "<leader>pg", builtin.git_files, { desc = "Lists only explicitly tracked files in project, respects .gitignore" })
-            vim.keymap.set("n", "<leader>ps", builtin.grep_string, { desc = "Search all files in project for a word FIXME" })
-            vim.keymap.set("n", "<leader>pl", builtin.live_grep, { desc = "Live search all files in project (comments, macros)" })
+            vim.keymap.set("n", "<leader>pf", builtin.find_files,
+                { desc = "Lists all files in project, respects .gitignore" })
+            vim.keymap.set("n", "<leader>pg", builtin.git_files,
+                { desc = "Lists only explicitly tracked files in project, respects .gitignore" })
+            vim.keymap.set("n", "<leader>ps", builtin.grep_string,
+                { desc = "Search all files in project for a word FIXME" })
+            vim.keymap.set("n", "<leader>pl", builtin.live_grep,
+                { desc = "Live search all files in project (comments, macros)" })
 
             -- LSP specific pickers
-            vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "Telescope: List symbols in current buffer" })
-            vim.keymap.set("n", "<leader>lS", builtin.lsp_workspace_symbols, { desc = "Telescope: List symbols across project" })
+            vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols,
+                { desc = "Telescope: List symbols in current buffer" })
+            vim.keymap.set("n", "<leader>lS", builtin.lsp_workspace_symbols,
+                { desc = "Telescope: List symbols across project" })
             vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "Telescope: List symbol definitions" })
             vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "Telescope: List symol references" })
-            vim.keymap.set("n", "<leader>li", builtin.lsp_implementations, { desc = "Telescope: List symbol implementations" })
+            vim.keymap.set("n", "<leader>li", builtin.lsp_implementations,
+                { desc = "Telescope: List symbol implementations" })
             vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions, { desc = "Telescope: List type definitions" })
 
             -- Vim pickers
@@ -52,7 +59,6 @@ return {
             vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
             vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
             vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-
         end
     }
 
