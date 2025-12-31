@@ -1,8 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        -- branch = "main",
-        -- build = ":TSUpdate",
+        build = ":TSUpdate",
         lazy = false,
         config = function()
             require("nvim-treesitter").setup({
@@ -11,6 +10,7 @@ return {
             })
 
             vim.api.nvim_create_autocmd("FileType", {
+                pattern = { "c", "cpp", "lua", "python", "bash", "make" },
                 callback = function()
                     pcall(vim.treesitter.start)
                 end,
