@@ -8,10 +8,32 @@ local function map(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local function is_quickfix_open()
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win.quickfix == 1 then
+            return true
+        end
+    end
+    return false
+end
+
+-- Define a function for opening or closing the quick fix window
+local function quickfix_toggle()
+    if is_quickfix_open() then
+        vim.cmd('cclose')
+    else
+        vim.cmd('copen')
+        vim.cmd('wincmd p')
+    end
+end
+
+map("n", "<leader>q", quickfix_toggle, "Toggle the QuickFix window open or close")
+
 -- LSP debugging stuff
 --
 -- Use `:lua require("user.globals").LspClientSummary()` to do this manually
-map("n", "<leader>Ql", function() debug.LspClientSummary() end, "Debug: Summarize the LSP configuration for the active buffer")
+map("n", "<leader>Ql", function() debug.LspClientSummary() end,
+    "Debug: Summarize the LSP configuration for the active buffer")
 
 -- Edit configuration files
 map("n", "<leader>ev", function() globals.EditConfig("lua/user/init.lua") end, "Edit top level user configuration")
@@ -90,4 +112,3 @@ vim.keymap.set("n", "\"c", "<Cmd>changes<CR>")
 -- LuaSnap related (using 'z' for the snipz namespace)
 vim.keymap.set("n", "<leader>zr", "<Cmd>SnipReloadAll<CR>")
 vim.keymap.set("n", "<leader>zl", "<Cmd>SnipList<CR>")
-
