@@ -86,3 +86,6 @@ vim.opt.splitbelow = true
 
 -- Disable system bell (particularly annoying when using the Cygwin console)
 vim.opt.belloff = esc
+
+vim.opt.showcmd = false
+vim.opt.cmdheight = 1

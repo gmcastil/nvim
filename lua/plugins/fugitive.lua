@@ -10,10 +10,10 @@ return {
             vim.keymap.set('n', '<leader>gc', ':Git commit -qam "', { noremap = true, desc = 'git commit -am' })
         end
     },
-    {
-        "barrettruth/diffs.nvim"
+    -- {
+    --     "barrettruth/diffs.nvim"
 
-    },
+    -- },
 
     -- {
     --     "lewis6991/gitsigns.nvim",
