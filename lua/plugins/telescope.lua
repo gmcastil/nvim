@@ -16,7 +16,10 @@ return {
         config = function()
             require("telescope").setup({
 
-                defaults = {},
+                defaults = {
+                    -- I hate these things
+                    devicons = false
+                },
 
                 pickers = {},
 
