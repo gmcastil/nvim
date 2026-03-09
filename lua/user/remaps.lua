@@ -113,6 +113,3 @@ vim.keymap.set("n", "\"c", "<Cmd>changes<CR>")
 vim.keymap.set("n", "<leader>zr", "<Cmd>SnipReloadAll<CR>")
 vim.keymap.set("n", "<leader>zl", "<Cmd>SnipList<CR>")
 
--- Make it easier to get out of terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>')
-

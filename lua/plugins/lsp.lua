@@ -248,6 +248,16 @@ return {
                 }
 
             })
+
+            -- Systemverilog / Verilog
+            vim.lsp.enable('verible')
+            vim.lsp.config('verible',{
+
+                cmd = { "verible-verilog-ls --indentation_spaces=4" },
+                filetypes = { "verilog", "systemverilog" },
+                root_markers = { ".git" }
+            })
+
         end,
 
         -- Optional: list of other specs or plugin names to load before this one
