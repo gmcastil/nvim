@@ -1,18 +1,23 @@
-Neovim Configuration
---------------------
+## Neovim Configuration
+
 # Installing language servers
 
 ## Lua-Ls
+
 To install the Lua language server on Mac OS:
+
 ```sh
 brew install lua-language-server
 ```
+
 This isn't available in the standard Debian repositories, so it'll need to be built from source.
+
 ```sh
 git clone https://github.com/LuaLS/lua-language-server
 cd lua-language-server
 ./make.sh
 ```
+
 Unfortunately, there does not appear to be a simple way to install it
 locally and there are plenty of path dependancies that the tool has.
 It seems to be structured more as a web application than as an actual
@@ -20,17 +25,24 @@ program to be installed. The easiest way is to just leave it in place
 and use a wrapper script that points to it.
 
 ## Bash
+
 To install the Bash language server on Mac OS:
+
 ```bash
 npm i -g bash-language-server
 ```
+
 ## Clangd
+
 This works pretty much out of the box
 
 ## VHDL-LS (VHDL Language Server)
+
 ```bash
 # First, need to install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# And make sure that cargo is actually in the path (don't use the system version of cargo)
+source $HOME/.cargo/env
 # Clone and build
 git clone https://github.com/VHDL-LS/rust_hdl.git
 cd rust_hdl
@@ -42,37 +54,54 @@ cp -av vhdl_libraries ~/.local/
 ```
 
 ## JSON
-Install the language server
+
 ```bash
+# First, install `npm` and the `nvm` version manager with something like
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# This will mangle .bashrc - go fix it and then source the setup script
+source $HOME/.nvm/nvm.sh
+# Set the NPM version to be whatever the latest is (it'll create a default)
+nvm install --lts
+# Now install the language server
 npm i -g vscode-langservers-extracted
 ```
 
 # Install tree-sitter
+
 The tree-sitter CLI tools are an NPM package, so run
+
 ```sh
 npm i -g tree-sitter-cli
 ```
+
 On Mac OS this can be done using `brew install tree-sitter-cli`.
 
 # Code Formatting
+
 ## Python and Others
+
 Currently using `black` and `isort` with the `conform.nvim` plugin. On Mac OS these could be installed through brew:
+
 ```sh
 brew install stylua
 brew install black isort
 brew install prettierd prettier
 ```
+
 This also will install the `prettierd` formatter for Markdown.
 
 # Additional tools
+
 ## Ripgrep
+
 The package manager of choice works fine on Debian
+
 ```bash
 apt-get install ripgrep
 ```
+
 or on Mac OS
+
 ```bash
 brew install ripgrep
 ```
-
-
