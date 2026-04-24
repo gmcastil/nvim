@@ -42,3 +42,11 @@ if vim.fn.executable("par") == 1 then
     })
 end
 
+-- Strip all trailing whitespace from Makefiles when saving, because there's no
+-- good reason to keep it around
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "Makefile", "*.mk" },
+    callback = function()
+        vim.cmd([[%s/\s\+$//e]])                            
+    end,
+})

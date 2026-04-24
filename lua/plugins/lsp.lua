@@ -249,6 +249,19 @@ return {
 
             })
 
+            -- Tcl
+            vim.lsp.enable('tclsp')
+            vim.lsp.config('tlcsp', {
+
+                cmd = { "tclsp" },
+
+                filetypes = { "tcl", "sdc", "xdc", "upf" },
+
+                root_markers = { "tclint.toml", ".tclint", "pyproject.toml", ".git" },
+
+            })
+
+
             -- Systemverilog / Verilog
             vim.lsp.enable('verible')
             vim.lsp.config('verible',{
