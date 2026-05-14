@@ -51,6 +51,8 @@ return {
             python = { "black" },
             markdown = { "prettierd" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
+            verilog = { "verilog_format" },
+            systemverilog = { "verilog_format" },
         },
         -- Set default options
         default_format_opts = {
@@ -58,6 +60,10 @@ return {
         },
         -- Customize formatters
         formatters = {
+            verilog_format = {
+                command = "verible-verilog-format",
+                args = { "--flagfile=.verible-format.flags", "-" },
+            },
             clang_format = {
                 prepend_args = { "--fallback-style=LLVM" },
             },
