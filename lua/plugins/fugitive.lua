@@ -10,6 +10,9 @@ return {
             vim.keymap.set('n', '<leader>gc', ':Git commit -qam "', { noremap = true, desc = 'git commit -am' })
         end
     },
+    {
+        "tpope/vim-surround",
+    },
     -- {
     --     "barrettruth/diffs.nvim"
 

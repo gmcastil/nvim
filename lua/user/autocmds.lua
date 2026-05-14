@@ -47,6 +47,13 @@ end
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "Makefile", "*.mk" },
     callback = function()
-        vim.cmd([[%s/\s\+$//e]])                            
+        vim.cmd([[%s/\s\+$//e]])
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "verilog", "systemverilog" },
+    callback = function()
+        vim.bo.equalprg = "verible-verilog-format --flagfile=.verible-format.flags -"
     end,
 })
