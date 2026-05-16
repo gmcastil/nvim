@@ -89,3 +89,6 @@ vim.opt.belloff = esc
 
 vim.opt.showcmd = false
 vim.opt.cmdheight = 1
+
+-- How long to wait after I stop typing to fire CursorHold
+vim.opt.updatetime = 500

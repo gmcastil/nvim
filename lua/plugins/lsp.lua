@@ -1,9 +1,17 @@
+vim.lsp.log.set_level(vim.log.levels.DEBUG)
+
 -- Set buffer local keybinds for when we attach to an LSP
 vim.api.nvim_create_autocmd("LspAttach", {
 
     group = vim.api.nvim_create_augroup("LspKeymaps", { clear = true }),
 
     callback = function(args)
+        -- This can return nil
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then
+            return
+        end
+
         local bufnr = args.buf
         local opts = { buffer = bufnr, noremap = true, silent = true }
 
@@ -25,6 +33,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.keymap.set("n", "gy", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Show hover documentation" })
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
+        -- If a client supports highlighting, add autocmds to turn it on or off
+        -- (set vim.opt.uptime to change the default duration to wait before
+        -- highlighting on or off)
+        if client.supports_method(client, "textDocument/documentHighlight") then
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                buffer = bufnr,
+                callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd("CursorMoved", {
+                buffer = bufnr,
+                callback = vim.lsp.buf.clear_references,
+            })
+        end
+    end,
+})
+
+-- Add support for the make-ls LSP
+vim.api.nvim_create_autocmd("FileType", {
+
+    pattern = "make",
+    callback = function()
+        vim.lsp.start({
+            name = "make-ls",
+            cmd = { "/home/castillo/go/bin/make-ls" },
+            root_dir = vim.fs.root(0, { "Makefile", "makefile" }),
+        })
     end,
 })
 
@@ -261,14 +297,46 @@ return {
 
             })
 
+            -- vim.lsp.enable("slang-server")
+            -- vim.lsp.config("slang-server", {
+            --     cmd = { "slang-server" },
+            --     root_markers = { ".git", ".slang" },
+            --     filetypes = {
+            --         "systemverilog",
+            --         "verilog",
+            --     },
+            --     on_attach = function(client, bufnr)
+            --         -- For Verilog with the
+            --         vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+            --     end,
+            -- })
+
 
             -- Systemverilog / Verilog
             vim.lsp.enable('verible')
             vim.lsp.config('verible', {
 
+                init_options = {
+                    trace = {
+                        server = "info"
+                    }
+                },
+
+                on_attach = function(client, bufnr)
+                    -- Definitions get provided by the tag stack
+                    client.server_capabilities.definitionProvider = false
+                end,
+
                 cmd = { "verible-verilog-ls" },
+
                 filetypes = { "verilog", "systemverilog" },
-                root_markers = { ".git" }
+
+                root_markers = { ".git" },
+
+                single_file_support = true,
+
+                capabilities = capabilities,
+
             })
         end,
 

@@ -2,6 +2,17 @@
 
 # Installing language servers
 
+## svlangserver
+
+Need NPM for this:
+
+```bash
+nvm install --lts
+npm i -g @imc-trading/svlangserver
+```
+
+Also make sure that Verilator is installed
+
 ## Lua-Ls
 
 To install the Lua language server on Mac OS:
@@ -64,6 +75,14 @@ source $HOME/.nvm/nvm.sh
 nvm install --lts
 # Now install the language server
 npm i -g vscode-langservers-extracted
+```
+
+## GNU Make
+
+The Neovim folks don't have any love for GNU make they all seem to love CMake instead.
+
+```
+go install github.com/owenrumney/make-ls/cmd/make-ls@latest
 ```
 
 # Install tree-sitter
