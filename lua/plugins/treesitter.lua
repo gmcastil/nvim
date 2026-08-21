@@ -16,16 +16,6 @@ return {
 					vim.treesitter.start()
 				end
 			})
-
-			-- Enable treesitter based folding for these
-			-- vim.api.nvim_create_autocmd('FileType', {
-			-- 	pattern = { 'python', 'sh', 'make', 'bitbake' }
-			-- 	callback = function()
-			-- 		vim.opt_local.foldmethod = 'expr'
-			-- 		vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-			--
-			-- 	end
-			-- end,
 		end,
 	},
 }
