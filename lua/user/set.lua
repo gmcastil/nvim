@@ -2,9 +2,6 @@
 vim.o.exrc = true
 vim.o.secure = true
 
--- Better cursor
-vim.opt.guicursor = ""
-
 -- Better indent behavior
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -18,7 +15,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
 
--- " Reread the contents of a file if it has changed on disk
+-- Reread the contents of a file if it has changed on disk
 vim.opt.autoread = true
 
 -- Control line wrapping behavior (text width is set on a file type basis
@@ -33,10 +30,7 @@ vim.opt.display = "lastline"
 vim.opt.scrolloff = 10
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 3
---
--- " Better command line completion
--- set wildmode=full
--- set wildmenu
+
 -- Hide buffers instead
 vim.opt.hidden = true
 

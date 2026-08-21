@@ -1,29 +1,13 @@
 -- Going to return these as a module namespace
 local M = {}
 
--- Reload global functions, keymaps, and options
+-- For version > 0.12 the restart command was introduced
 function M.ReloadConfig()
-
-    local modules = {
-        "user.globals",
-        "user.remaps",
-        "user.set"
-    }
-
-    for _, name in ipairs(modules) do
-        if package.loaded[name] then
-            print("Unloading submodule " .. name)
-            package.loaded[name] = nil
-        end
+    local version = vim.version()
+    if version.major > 0 or version.minor >= 12 then
+        vim.cmd("restart")
+        print("User configuration reloaded")
     end
-
-    for _, name in ipairs(modules) do
-        require(name)
-        print("Reloaded " .. name)
-    end
-
-    print("User configuration reloaded")
-
 end
 
 -- Edits the user configuration file relative to the config directory (e.g.,

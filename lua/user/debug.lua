@@ -13,15 +13,13 @@ end
 -- Summarizes the output of the giant table from vim.lsp.get_active_clients()
 function M.LspClientSummary()
 
-    -- local clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local clients = vim.lsp.get_clients({ bufnr = 0 })
     if vim.tbl_isempty(clients) then
         vim.notify("No LSP clients attached to the current buffer", vim.log.levels.INFO)
         return
     end
 
-    -- Assume there is only one client per buffer for now - TODO should probably
-    -- iterate over all clients and build a larger summary
+    -- Assume there is only one client per buffer for now
     local client = clients[1]
     local summary = vim.inspect({
         name = client.name,
