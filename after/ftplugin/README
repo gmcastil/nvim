@@ -1,0 +1,5 @@
+The order of sourcing ftplugin files is:
+1. ~/.vim/ftplugin/
+2. $VIMRUNTIME/ftplugin/
+3. ~/.vim/after/ftplugin/
+
