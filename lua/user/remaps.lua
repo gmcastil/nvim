@@ -29,6 +29,14 @@ end
 
 map("n", "<leader>q", quickfix_toggle, "Toggle the QuickFix window open or close")
 
+-- LSP keybinds
+vim.keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = true, severity = nil, desc = "Jump to the next diagnostic" })
+end)
+vim.keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = true, severity = nil, desc = "Jump to the previous diagnostic" })
+end)
+
 -- LSP debugging stuff
 --
 -- Use `:lua require("user.globals").LspClientSummary()` to do this manually

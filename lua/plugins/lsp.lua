@@ -4,11 +4,27 @@ return {
 	lazy = false,
 	config = function()
 		vim.lsp.enable({
+			"clangd",
 			"pyright",
 			"lua_ls",
-			"bitbake-language-server",
+			"language-server-bitbake",
 		})
 	end,
+
+	vim.lsp.log.set_level("debug"),
+
+	vim.diagnostic.config({
+		float = {
+			border = "single",
+			style = "minimal",
+		},
+	}),
+
+	vim.lsp.config("language-server-bitbake", {
+		cmd = { "language-server-bitbake", "--stdio" },
+		filetypes = { "bitbake" },
+		root_markers = { ".git", "conf" }
+	}),
 
 	-- Since we're mostly using this to format Neovim Lua code, we need to
 	-- let the LSP know where to find objects on the runtime path (see
