@@ -8,6 +8,7 @@ return {
 			"pyright",
 			"lua_ls",
 			"language-server-bitbake",
+			"bashls"
 		})
 	end,
 
