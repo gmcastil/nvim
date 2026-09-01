@@ -7,11 +7,11 @@ return {
 
 		config = function()
 			-- Install parsers
-			require("nvim-treesitter").install({ "python", "bash", "make", "bitbake" })
+			require("nvim-treesitter").install({ "python", "bash", "make", "bitbake", "markdown" })
 
 			-- Enable treesitter based highlighting for these
 			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "python", "sh", "make", "bitbake" },
+				pattern = { "python", "sh", "make", "bitbake", "markdown" },
 				callback = function()
 					vim.treesitter.start()
 				end,

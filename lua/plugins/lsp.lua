@@ -8,7 +8,8 @@ return {
 			"pyright",
 			"lua_ls",
 			"language-server-bitbake",
-			"bashls"
+			"bashls",
+			"marksman",
 		})
 	end,
 
@@ -25,6 +26,12 @@ return {
 		cmd = { "language-server-bitbake", "--stdio" },
 		filetypes = { "bitbake" },
 		root_markers = { ".git", "conf" }
+	}),
+
+	vim.lsp.config("marksman", {
+		cmd = { "marksman", "server" },
+		filetypes = { "markdown", "markdown.mdx" },
+		root_markers = { ".git" }
 	}),
 
 	-- Since we're mostly using this to format Neovim Lua code, we need to
