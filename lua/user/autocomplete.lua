@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.opt.completeopt = "menu,menuone,noselect,popup,nearest"
+vim.opt.completeopt = "menu,menuone,noinsert,popup,nearest"
 vim.opt.pumheight = 10
 vim.opt.pummaxwidth = 40
 vim.opt.pumborder = "rounded"

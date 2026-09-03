@@ -6,18 +6,6 @@ vim.o.secure = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
--- Enable spelling for just prose-like files
-vim.opt.spelllang = "en_us"
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown", "gitcommit", "text", "tex", "rst", "mail", "gitrebase" },
-	callback = function()
-		vim.opt_local.spell = true
-	end,
-})
--- Put the spell file in the config directory so it can be version controller
--- since the default is to stick it somewhere like .local/share
-vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
-
 -- Fix backspace
 vim.opt.backspace = "indent,start,eol"
 
@@ -96,6 +84,9 @@ vim.opt.splitbelow = true
 
 -- Disable system bell (particularly annoying when using the Cygwin console)
 vim.opt.belloff = esc
+
+-- Suppress autocomplete message spam
+vim.opt.shortmess:append('c')
 
 vim.opt.showcmd = false
 vim.opt.cmdheight = 1

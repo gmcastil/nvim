@@ -4,32 +4,32 @@ local debug = require("user.debug")
 
 -- Define a local helper function to set keymaps more easily
 local function map(mode, lhs, rhs, desc)
-    local opts = { noremap = true, silent = true, desc = desc }
-    vim.keymap.set(mode, lhs, rhs, opts)
+	local opts = { noremap = true, silent = true, desc = desc }
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 local function is_quickfix_open()
-    for _, win in pairs(vim.fn.getwininfo()) do
-        if win.quickfix == 1 then
-            return true
-        end
-    end
-    return false
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win.quickfix == 1 then
+			return true
+		end
+	end
+	return false
 end
 
 -- Define a function for opening or closing the quick fix window
 local function quickfix_toggle()
-    if is_quickfix_open() then
-        vim.cmd('cclose')
-    else
-        vim.cmd('copen')
-        vim.cmd('wincmd p')
-    end
+	if is_quickfix_open() then
+		vim.cmd("cclose")
+	else
+		vim.cmd("copen")
+		vim.cmd("wincmd p")
+	end
 end
 
 map("n", "<leader>q", quickfix_toggle, "Toggle the QuickFix window open or close")
 
--- LSP keybinds
+-- LSP keybinds and other stuff
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1, float = true, severity = nil, desc = "Jump to the next diagnostic" })
 end)
@@ -40,20 +40,35 @@ end)
 -- This might be a problem in tmux sessions
 vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger LSP completion" })
 
--- LSP debugging stuff
---
+vim.keymap.set("n", "K", function()
+	vim.lsp.buf.hover({
+		border = "rounded",
+		max_width = 80,
+		max_height = 20
+	})
+end, { desc = "LSP hover documentation" })
+
 -- Use `:lua require("user.globals").LspClientSummary()` to do this manually
-map("n", "<leader>Ql", function() debug.LspClientSummary() end,
-    "Debug: Summarize the LSP configuration for the active buffer")
+map("n", "<leader>Ql", function()
+	debug.LspClientSummary()
+end, "Debug: Summarize the LSP configuration for the active buffer")
 
 -- Edit configuration files
-map("n", "<leader>ev", function() globals.EditConfig("lua/user/init.lua") end, "Edit top level user configuration")
-map("n", "<leader>kv", function() globals.EditConfig("lua/user/remaps.lua") end, "Edit user keymaps")
-map("n", "<leader>sv", function() globals.ReloadConfig() end, "Reloads the entire configuration")
+map("n", "<leader>ev", function()
+	globals.EditConfig("lua/user/init.lua")
+end, "Edit top level user configuration")
+map("n", "<leader>kv", function()
+	globals.EditConfig("lua/user/remaps.lua")
+end, "Edit user keymaps")
+map("n", "<leader>sv", function()
+	globals.ReloadConfig()
+end, "Reloads the entire configuration")
 
 -- Open special buffers
 map("n", "<leader>pv", vim.cmd.Ex, "Open Netrw")
-map("n", "<leader>L", function() globals.OpenLuaScratchBuffer() end, "Open a Lua scratch buffer")
+map("n", "<leader>L", function()
+	globals.OpenLuaScratchBuffer()
+end, "Open a Lua scratch buffer")
 
 -- Buffer navigation
 map("n", "<leader>c", "<C-w>c", "Close the current window")
@@ -61,7 +76,7 @@ map("n", "<leader><leader>", "<C-^>", "Alternate file")
 
 -- Expands `%%` to the CWD of the file in the current buffer (variation on `%`)
 vim.keymap.set("c", "%%", function()
-    return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:p:h") .. "/" or "%%"
+	return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:p:h") .. "/" or "%%"
 end, { expr = true, desc = "Expands `%%` to the CWD of the current buffer" })
 
 -- Stop highlighting for the 'hlsearch' option. Doing it this way
@@ -93,13 +108,13 @@ map("v", "J", ":m '>+1<CR>gv=gv", "")
 map("v", "K", ":m '<-2<CR>gv=gv", "")
 
 -- Delete text to void register (experimental)
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Yank into system clipboard more conveniently (experimental)
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
 -- Make current buffer executable on disk
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod ug+x %<CR><CR>")
@@ -115,11 +130,16 @@ vim.keymap.set("n", "N", "Nzvzz")
 vim.keymap.set("n", "&", "<Cmd>&&<CR>")
 
 -- List mappings
-vim.keymap.set("n", "\"\"", "<Cmd>registers \"0123456789abcdefghijklmnopqrstuvwxyz*+.:<CR>")
-vim.keymap.set("n", "\"j", "<Cmd>jumps<CR>")
+vim.keymap.set("n", '""', '<Cmd>registers "0123456789abcdefghijklmnopqrstuvwxyz*+.:<CR>')
+vim.keymap.set("n", '"j', "<Cmd>jumps<CR>")
 -- Might replace with the undo history plugin at some point
-vim.keymap.set("n", "\"c", "<Cmd>changes<CR>")
+vim.keymap.set("n", '"c', "<Cmd>changes<CR>")
 
 -- LuaSnap related (using 'z' for the snipz namespace)
 vim.keymap.set("n", "<leader>zr", "<Cmd>SnipReloadAll<CR>")
 vim.keymap.set("n", "<leader>zl", "<Cmd>SnipList<CR>")
+
+-- Tab stuff (don't get carried away with these)
+vim.keymap.set("n", "<leader>tn", function()
+	vim.cmd("tabnew")
+end)
