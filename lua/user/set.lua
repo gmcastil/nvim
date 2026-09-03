@@ -6,12 +6,21 @@ vim.o.secure = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
--- Spelling
+-- Enable spelling for just prose-like files
 vim.opt.spelllang = "en_us"
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "markdown", "gitcommit", "text", "tex", "rst", "mail", "gitrebase" },
 	callback = function()
 		vim.opt_local.spell = true
+	end,
+})
+
+-- Autocomplete for everything except for a few file types
+local no_autocomplete_fts = { markdown = true, gitcommit = true, text = true }
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	callback = function(args)
+		local ft = vim.bo[args.buf].filetype
+		vim.o.autocomplete = not no_autocomplete_fts[ft]
 	end,
 })
 

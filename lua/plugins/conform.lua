@@ -12,8 +12,8 @@ return {
 			function()
 				require("conform").format({ async = true })
 			end,
-			mode = "n",
-			desc = "Format buffer using external formatter",
+			mode = { "n", "v" },
+			desc = "Format buffer or visual region using external formatter",
 		},
 	},
 

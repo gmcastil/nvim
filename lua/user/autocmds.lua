@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
 	end,
 })
 
+-- Turn off the cursorline when we leave an active window
 vim.api.nvim_create_autocmd({ "WinLeave" }, {
 	group = group,
 	pattern = { "*" },
