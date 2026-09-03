@@ -6,6 +6,7 @@ return {
 		vim.lsp.enable({
 			"clangd",
 			"pyright",
+			"jsonls",
 			"lua_ls",
 			"language-server-bitbake",
 			"bashls",

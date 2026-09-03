@@ -51,7 +51,7 @@ end
 local function user_host_filename()
     local user = os.getenv('USER') or os.getenv('USERNAME')
     local host = vim.fn.hostname()
-    local fname = fullpath_component()
+    local fname = fullpath_component():gsub("%%", '%%%%')
     local status_str = buffer_status()
 
     if fname == nil then
