@@ -4,64 +4,60 @@ return {
 
 	event = { "BufReadPre", "BufNewFile" },
 
-	config = function()
-		require("gitsigns").setup({
+	opts = {
 
-			signs = {
-				add = { text = "┃" },
-				change = { text = "┃" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-				untracked = { text = "┆" },
-			},
+		numhl = true,
+		current_line_blame = false,
+		current_line_blame_opts = { delay = 300 },
+		signcolumn = false,
 
-			signs_staged = {
-				add = { text = "┃" },
-				change = { text = "┃" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-				untracked = { text = "┆" },
-			},
+		-- This renders the date a bit more human readable
+		current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 
-			signs_staged_enable = true,
-			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+		on_attach = function(bufnr)
+			local gs = require("gitsigns")
+			local function map(mode, lhs, rhs, desc)
+				vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+			end
 
-			watch_gitdir = {
-				follow_files = true,
-			},
+			-- Next hunk	
+			map("n", "]c", function()
+				if vim.wo.diff then
+					return "]c"
+				end
+				vim.schedule(gs.next_hunk)
+				return "<Ignore>"
+			end, "Next hunk")
 
-			auto_attach = true,
-			attach_to_untracked = false,
-			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			-- Previous hunk
+			map("n", "[c", function()
+				if vim.wo.diff then
+					return "[c"
+				end
+				vim.schedule(gs.prev_hunk)
+				return "<Ignore>"
+			end, "Prev hunk")
 
-			current_line_blame_opts = {
-				virt_text = true,
-				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-				delay = 1000,
-				ignore_whitespace = false,
-				virt_text_priority = 100,
-				use_focus = true,
-			},
+			-- Hunk actions
+			map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+			map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
+			map("v", "<leader>hs", function()
+				gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, "Stage hunk")
+			map("v", "<leader>hr", function()
+				gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, "Reset hunk")
 
-			current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
-			blame_formatter = nil, -- Use default
-			sign_priority = 6,
-			update_debounce = 100,
-			status_formatter = nil, -- Use default
-			max_file_length = 40000, -- Disable if file is longer than this (in lines)
+			map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+			map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+			map("n", "<leader>hb", function()
+				gs.blame_line({ full = true })
+			end, "Blame line")
+			map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle inline blame")
+			map("n", "<leader>hd", gs.diffthis, "Diff against index")
 
-			preview_config = {
-				-- Options passed to nvim_open_win
-				style = "minimal",
-				relative = "cursor",
-				row = 0,
-				col = 1,
-			},
-		})
-	end,
+			-- Text object for hunks
+			map({ "o", "x" }, "ih", gs.select_hunk, "Select hunk")
+		end,
+	},
 }
