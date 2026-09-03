@@ -7,12 +7,22 @@ return {
 	opts = {
 
 		numhl = true,
-		current_line_blame = false,
-		current_line_blame_opts = { delay = 300 },
 		signcolumn = false,
 
+		-- This might cause some cursos jumping if this is toggled on and the
+		-- delay is too short
+		current_line_blame = false,
+		current_line_blame_opts = { delay = 700 },
 		-- This renders the date a bit more human readable
 		current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+
+		preview_config = {
+			border = "rounded",
+			style = "minimal",
+			relative = "cursor",
+			row = 0,
+			col = 1,
+		},
 
 		on_attach = function(bufnr)
 			local gs = require("gitsigns")
@@ -20,7 +30,7 @@ return {
 				vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
 			end
 
-			-- Next hunk	
+			-- Next hunk
 			map("n", "]c", function()
 				if vim.wo.diff then
 					return "]c"
