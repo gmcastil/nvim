@@ -6,6 +6,15 @@ vim.o.secure = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
+-- Spelling
+vim.opt.spelllang = "en_us"
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "gitcommit", "text", "tex", "rst", "mail", "gitrebase" },
+	callback = function()
+		vim.opt_local.spell = true
+	end,
+})
+
 -- Fix backspace
 vim.opt.backspace = "indent,start,eol"
 
@@ -48,14 +57,14 @@ vim.opt.shortmess:append("I")
 -- Turn off list mode by default but still set listchars so we can toggle them
 vim.opt.list = false
 if vim.env.LANG and vim.env.LANG:match("UTF%-8") then
-    vim.opt.listchars = {
-        tab = "→·",
-        trail = "·",
-        extends = "»",
-        precedes = "«",
-        nbsp = "+",
-        eol = "$",
-    }
+	vim.opt.listchars = {
+		tab = "→·",
+		trail = "·",
+		extends = "»",
+		precedes = "«",
+		nbsp = "+",
+		eol = "$",
+	}
 end
 
 vim.opt.hlsearch = false
