@@ -15,15 +15,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
--- Autocomplete for everything except for a few file types
-local no_autocomplete_fts = { markdown = true, gitcommit = true, text = true }
-vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
-	callback = function(args)
-		local ft = vim.bo[args.buf].filetype
-		vim.o.autocomplete = not no_autocomplete_fts[ft]
-	end,
-})
-
 -- Fix backspace
 vim.opt.backspace = "indent,start,eol"
 
@@ -48,6 +39,10 @@ vim.opt.display = "lastline"
 vim.opt.scrolloff = 10
 vim.opt.sidescroll = 1
 vim.opt.sidescrolloff = 3
+
+-- Enable wild menu
+vim.opt.wildmenu = true
+vim.opt.wildmode = "longest:full,full"
 
 -- Hide buffers instead
 vim.opt.hidden = true

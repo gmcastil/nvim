@@ -37,6 +37,9 @@ vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ count = -1, float = true, severity = nil, desc = "Jump to the previous diagnostic" })
 end)
 
+-- This might be a problem in tmux sessions
+vim.keymap.set("i", "<C-Space>", "<C-x><C-o>", { desc = "Trigger LSP completion" })
+
 -- LSP debugging stuff
 --
 -- Use `:lua require("user.globals").LspClientSummary()` to do this manually
