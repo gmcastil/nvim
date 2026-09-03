@@ -14,6 +14,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.spell = true
 	end,
 })
+-- Put the spell file in the config directory so it can be version controller
+-- since the default is to stick it somewhere like .local/share
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 
 -- Fix backspace
 vim.opt.backspace = "indent,start,eol"
