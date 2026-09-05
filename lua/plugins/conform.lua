@@ -19,18 +19,26 @@ return {
 
 	opts = {
 		formatters_by_ft = {
+            c = { "clang_format" },
 			lua = { "stylua" },
 			-- Conform will run multiple formatters sequentially
 			python = { "isort", "black" },
-			-- Conform will run the first available formatter
-			javascript = { "prettierd", "prettier", stop_after_first = true },
+			-- If there is a noticeable lag here, can look at using prettierd
+			javascript = { "prettier" },
+			markdown = { "prettier" },
 		},
 		formatters = {
+            clang_format = {
+                prepend_args = { "--fallback-style=LLVM" },
+            },
 			isort = {
 				command = "isort",
-				-- stdin = true,
 				args = { "$FILENAME" },
-				stdin = false
+				stdin = false,
+			},
+			shfmt = {
+				command = "shfmt",
+				args = { "-i", "4" },
 			},
 		},
 	},
