@@ -25,6 +25,14 @@ return {
 			-- Conform will run the first available formatter
 			javascript = { "prettierd", "prettier", stop_after_first = true },
 		},
+		formatters = {
+			isort = {
+				command = "isort",
+				-- stdin = true,
+				args = { "$FILENAME" },
+				stdin = false
+			},
+		},
 	},
 }
 -- return {
@@ -115,3 +123,4 @@ return {
 --         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 --     end,
 -- }
+--
