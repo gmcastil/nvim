@@ -21,8 +21,7 @@ return {
 		formatters_by_ft = {
             c = { "clang_format" },
 			lua = { "stylua" },
-			-- Conform will run multiple formatters sequentially
-			python = { "isort", "black" },
+			python = { "ruff_organize_imports", "ruff_format" },
 			-- If there is a noticeable lag here, can look at using prettierd
 			javascript = { "prettier" },
 			markdown = { "prettier" },
