@@ -25,16 +25,17 @@ return {
 			-- If there is a noticeable lag here, can look at using prettierd
 			javascript = { "prettier" },
 			markdown = { "prettier" },
+			make = { "trim_whitespace" },
 		},
 		formatters = {
             clang_format = {
                 prepend_args = { "--fallback-style=LLVM" },
             },
-			isort = {
-				command = "isort",
-				args = { "$FILENAME" },
-				stdin = false,
-			},
+			-- isort = {
+			-- 	command = "isort",
+			-- 	args = { "$FILENAME" },
+			-- 	stdin = false,
+			-- },
 			shfmt = {
 				command = "shfmt",
 				args = { "-i", "4" },

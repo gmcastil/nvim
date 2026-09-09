@@ -8,6 +8,7 @@ return {
 			"pyright",
 			"jsonls",
 			"lua_ls",
+			"devicetree-language-server",
 			"language-server-bitbake",
 			"bashls",
 			"marksman",
@@ -21,6 +22,10 @@ return {
 			border = "single",
 			style = "minimal",
 		},
+	}),
+
+	vim.lsp.config("devicetree-language-server", {
+		cmd = { "devicetree-language-server", "--stdio" },
 	}),
 
 	vim.lsp.config("language-server-bitbake", {
@@ -38,13 +43,14 @@ return {
 	-- Going to use pyright and ruff together, so disable linting, analysis, and
 	-- import ordering from pyright and have ruff do it instead.
 	vim.lsp.config("pyright", {
-
 		settings = {
-			disableOrganizeImports = true,
-		},
-		python = {
-			analysis = {
-				ignore = { "*" },
+			pyright = {
+				disableOrganizeImports = true,
+			},
+			python = {
+				analysis = {
+					ignore = { "*" },
+				},
 			},
 		},
 	}),

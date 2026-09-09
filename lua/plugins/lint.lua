@@ -9,6 +9,7 @@ return {
 				sh = { "shellcheck" },
 				bash = { "shellcheck" },
 				bitbake = { "oelint-adv" },
+				make = { "checkmake" },
 			}
 
 			-- Run linters on certain events
