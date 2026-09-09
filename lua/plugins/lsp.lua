@@ -12,6 +12,7 @@ return {
 			"language-server-bitbake",
 			"bashls",
 			"marksman",
+			"yamlls",
 		})
 	end,
 

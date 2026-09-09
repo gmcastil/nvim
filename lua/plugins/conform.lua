@@ -24,20 +24,19 @@ return {
 			sh = { "shfmt" },
 			bash = { "shfmt" },
 			python = { "ruff_organize_imports", "ruff_format" },
+			json = { "prettier" },
 			-- If there is a noticeable lag here, can look at using prettierd
 			javascript = { "prettier" },
 			markdown = { "prettier" },
 			make = { "trim_whitespace" },
 		},
 		formatters = {
+			prettier = {
+				prepend_args = { "--tab-width", "4", "--no-use-tabs"},
+			},
 			clang_format = {
 				prepend_args = { "--fallback-style=LLVM" },
 			},
-			-- isort = {
-			-- 	command = "isort",
-			-- 	args = { "$FILENAME" },
-			-- 	stdin = false,
-			-- },
 			shfmt = {
 				command = "shfmt",
 				args = { "-i", "4" },
