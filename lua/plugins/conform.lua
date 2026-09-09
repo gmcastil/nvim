@@ -19,8 +19,10 @@ return {
 
 	opts = {
 		formatters_by_ft = {
-            c = { "clang_format" },
+			c = { "clang_format" },
 			lua = { "stylua" },
+			sh = { "shfmt" },
+			bash = { "shfmt" },
 			python = { "ruff_organize_imports", "ruff_format" },
 			-- If there is a noticeable lag here, can look at using prettierd
 			javascript = { "prettier" },
@@ -28,9 +30,9 @@ return {
 			make = { "trim_whitespace" },
 		},
 		formatters = {
-            clang_format = {
-                prepend_args = { "--fallback-style=LLVM" },
-            },
+			clang_format = {
+				prepend_args = { "--fallback-style=LLVM" },
+			},
 			-- isort = {
 			-- 	command = "isort",
 			-- 	args = { "$FILENAME" },
