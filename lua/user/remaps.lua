@@ -44,7 +44,7 @@ vim.keymap.set("n", "K", function()
 	vim.lsp.buf.hover({
 		border = "rounded",
 		max_width = 80,
-		max_height = 20
+		max_height = 20,
 	})
 end, { desc = "LSP hover documentation" })
 
