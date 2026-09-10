@@ -16,7 +16,7 @@ return {
 		})
 	end,
 
-	vim.lsp.log.set_level("debug"),
+	vim.lsp.log.set_level("info"),
 
 	vim.diagnostic.config({
 		float = {
@@ -25,16 +25,20 @@ return {
 		},
 	}),
 
+	-- Device tree language server
 	vim.lsp.config("devicetree-language-server", {
 		cmd = { "devicetree-language-server", "--stdio" },
+		filetypes = { "dts" },
 	}),
 
+	-- Bitbake language server (really wish cross-references would work)
 	vim.lsp.config("language-server-bitbake", {
 		cmd = { "language-server-bitbake", "--stdio" },
 		filetypes = { "bitbake" },
 		root_markers = { ".git", "conf" },
 	}),
 
+	-- Markdown language server
 	vim.lsp.config("marksman", {
 		cmd = { "marksman", "server" },
 		filetypes = { "markdown", "markdown.mdx" },
@@ -62,6 +66,18 @@ return {
 				logLevel = "debug",
 			},
 		},
+	}),
+
+	vim.api.nvim_create_autocmd("FileType", {
+		group = vim.api.nvim_create_augroup("Lsp_attach_make", { clear = true }),
+		pattern = "make",
+		callback = function()
+			vim.lsp.start({
+				name = "make-ls",
+				cmd = { vim.fn.expand("$HOME/go/bin/make-ls") },
+				root_dir = vim.fs.root(0, { "Makefile", "makefile", "GNUmakefile" }),
+			})
+		end,
 	}),
 
 	-- Still want to defer to pyright for the hover notification

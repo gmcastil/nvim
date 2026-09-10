@@ -83,6 +83,8 @@ return {
 		-- Vim pickers
 		vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Show open buffers" })
 
+		vim.keymap.set("n", "<leader>pm", builtin.man_pages, { desc = "List man pages" })
+
 		-- Stolen from kickstart....not sure if I'll use them
 		vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
