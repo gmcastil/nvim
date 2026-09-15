@@ -19,7 +19,7 @@ end
 
 -- Define a function for opening or closing the quick fix window
 local function quickfix_toggle()
-	if is_quickfix_open() then
+	if is_quickfix_open() and #vim.api.nvim_list_wins() > 1 then
 		vim.cmd("cclose")
 	else
 		vim.cmd("copen")
