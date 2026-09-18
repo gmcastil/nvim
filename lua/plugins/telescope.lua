@@ -13,7 +13,7 @@ return {
 		require("telescope").setup({
 
 			defaults = {
-				devicons = false,
+				devicons = true,
 			},
 
 			pickers = {},
@@ -56,14 +56,9 @@ return {
 			builtin.lsp_document_symbols,
 			{ desc = "Telescope: List symbols in current buffer" }
 		)
-		vim.keymap.set(
-			"n",
-			"<leader>lf",
-			function()
-				builtin.lsp_document_symbols({ symbols = 'function' })
-			end,
-			{ desc = "Telescope: List functions in current buffer" }
-		)
+		vim.keymap.set("n", "<leader>lf", function()
+			builtin.lsp_document_symbols({ symbols = "function" })
+		end, { desc = "Telescope: List functions in current buffer" })
 		vim.keymap.set(
 			"n",
 			"<leader>lS",
