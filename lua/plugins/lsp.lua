@@ -16,7 +16,7 @@ return {
 		})
 	end,
 
-	vim.lsp.log.set_level("info"),
+	vim.lsp.log.set_level("warn"),
 
 	vim.diagnostic.config({
 		float = {

@@ -13,7 +13,7 @@ return {
 		require("telescope").setup({
 
 			defaults = {
-				devicons = false,
+				devicons = true,
 			},
 
 			pickers = {},
