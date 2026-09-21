@@ -1,7 +1,12 @@
 #!/bin/bash
 
 printf '%40s' "Cleaning Neovim cache and plugin directories..." >&1
-if ! rm -rf ~/.local/state/nvim ~/.cache/nvim >/dev/null 2>&1; then
+if ! rm -rf \
+    ~/.local/state/nvim \
+    ~/.local/share/nvim/lazy \
+    ~/.local/share/nvim/telescope_history \
+    ~/.cache/nvim \
+    >/dev/null 2>&1; then
 	printf 'FAIL\n' >&1
 	exit 1
 else
