@@ -18,6 +18,7 @@ function M.EditConfig(filename)
 
     local success, err = pcall(function()
         vim.cmd("tabedit " .. config_file)
+		vim.cmd.tcd(vim.fn.stdpath("config"))
     end)
 
     if not success then
