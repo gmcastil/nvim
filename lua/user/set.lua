@@ -93,3 +93,7 @@ vim.opt.cmdheight = 1
 
 -- How long to wait after I stop typing to fire CursorHold
 vim.opt.updatetime = 500
+
+-- Using Lualine for the status line which shows the mode we're in
+vim.opt.showmode = false
+
