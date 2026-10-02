@@ -97,3 +97,8 @@ vim.opt.updatetime = 500
 -- Using Lualine for the status line which shows the mode we're in
 vim.opt.showmode = false
 
+-- Enable list formatting (n) and keep the second-line indent (2)
+vim.opt.formatoptions:append("n2")
+-- Define what Neovim recognizes as a bullet/list marker
+vim.opt.formatlistpat = [[^\s*[-*+]\s+]]
+
