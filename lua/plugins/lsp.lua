@@ -72,11 +72,14 @@ return {
 		group = vim.api.nvim_create_augroup("Lsp_attach_make", { clear = true }),
 		pattern = "make",
 		callback = function()
-			vim.lsp.start({
-				name = "make-ls",
-				cmd = { vim.fn.expand("$HOME/go/bin/make-ls") },
-				root_dir = vim.fs.root(0, { "Makefile", "makefile", "GNUmakefile" }),
-			})
+			local root = vim.fs.root(0, { "Makefile", "makefile", "GNUmakefile", "mk/" })
+			if root then
+				vim.lsp.start({
+					name = "make-ls",
+					cmd = { vim.fn.expand("$HOME/go/bin/make-ls") },
+					root_dir = root
+				})
+			end
 		end,
 	}),
 
